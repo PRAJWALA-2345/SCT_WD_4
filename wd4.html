@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Original To-Do App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #FF9A8B, #FFC3A0);
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: #444;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 60%;
+        }
+        button {
+            background-color: #FF6F61;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #E75550;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        li.completed {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        .actions button {
+            padding: 5px 10px;
+            font-size: 0.9em;
+            background-color: #FF6F61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .actions button:hover {
+            background-color: #E75550;
+        }
+    </style>
+</head>
+<body>
+    <h1>Original To-Do App</h1>
+    <input type="text" id="task-input" placeholder="Enter a task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="task-list"></ul>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('task-input');
+            const taskValue = taskInput.value.trim();
+            if (taskValue) {
+                const taskList = document.getElementById('task-list');
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${taskValue}</span>
+                    <div class="actions">
+                        <button onclick="markComplete(this)">Complete</button>
+                        <button onclick="deleteTask(this)">Delete</button>
+                    </div>`;
+                taskList.appendChild(li);
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task!');
+            }
+        }
+
+        function markComplete(button) {
+            const task = button.closest('li');
+            task.classList.toggle('completed');
+        }
+
+        function deleteTask(button) {
+            const task = button.closest('li');
+            task.remove();
+        }
+    </script>
+</body>
+</html>
